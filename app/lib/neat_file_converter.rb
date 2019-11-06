@@ -10,7 +10,7 @@ class NeatFileConverter
   def convert_file_names
     get_sub_directories.each do |sub_dir|
       get_files_for(sub_dir).each do |f|
-        FileRenamer.rename_file f
+        Factory.create_renamer(f).rename_file
       end
     end
   end
