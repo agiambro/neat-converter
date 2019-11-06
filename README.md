@@ -1,6 +1,6 @@
 # Neat Receipts - File Converter
 
-A file renaming utility to allow you to migrate off of NeatReceipts (Neat for Mac).
+A file renaming utility that helps you migrate off of NeatReceipts (Neat for Mac).
 
 ## Assumptions
 
