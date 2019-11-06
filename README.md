@@ -4,4 +4,4 @@ A file renaming utility to allow you to migrate off of NeatReceipts (Neat for Ma
 
 ## Assumptions
 
-You used Smart Folders and only saved Receipt and Document types.  You moved all smart folders to a local directory.
+You used Smart Folders and only saved Receipt and Document types.  All smart folders have been moved to a local directory.
