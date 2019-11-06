@@ -1,6 +1,4 @@
-require_relative '../../../app/lib/neat_file_converter'
-
-describe NeatFileConverter do
+RSpec.describe NeatFileConverter do
   let(:parent_dir) { '/Users/giambrone/Documents/raw scans/exact-scans/*' }
   let(:subject) { NeatFileConverter.new parent_dir }
   let(:sub_dirs) {
@@ -23,6 +21,12 @@ describe NeatFileConverter do
       file_names = ['file-1.pdf', 'file-2.pdf']
       expect(Dir).to receive(:children) { file_names }
       expect(subject.get_files_for('sub_dir')).to eq file_names
+    end
+  end
+
+  describe '#convert_file_names' do
+    xit '' do
+
     end
   end
 end

@@ -1,3 +1,8 @@
+require_relative '../app/lib/renamers/factory'
+require_relative '../app/lib/renamers/document'
+require_relative '../app/lib/renamers/receipt'
+require_relative '../app/lib/neat_file_converter'
+
 RSpec.configure do |config|
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
