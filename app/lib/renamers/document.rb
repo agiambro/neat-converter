@@ -15,7 +15,8 @@ class Document
   def parse_title
     regex = /Document-(.*)(Mon|Tue|Wed|Thu|Fri|Sat|Sun)/
     matches = @file_name.match regex
-    matches[1].strip
+    title = matches[1].strip
+    title.nil? ? title : clean_hyphen_join(title)
   end
 
   def parse_date
@@ -26,5 +27,11 @@ class Document
     regex = /(Mon|Tue|Wed|Thu|Fri|Sat|Sun)[^.$]*/
     matches = @file_name.match regex
     clean_date = matches[0].strip
+  end
+
+  def clean_hyphen_join str
+    items = str.split('-')
+    return str if items.size == 0
+    items.map{|i| i.strip}
   end
 end
