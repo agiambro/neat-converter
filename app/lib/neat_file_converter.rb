@@ -1,25 +1,27 @@
 require 'byebug'
 
 class NeatFileConverter
-  DEFAULT_DIR = '/Users/giambrone/Documents/raw scans/exact-scans/*'
+  DEFAULT_DIR = '/Users/giambrone/Documents/raw scans/exact-scans'
 
   def initialize parent_dir=DEFAULT_DIR
     @parent_dir = parent_dir
   end
 
   def convert_file_names
-    get_sub_directories.each do |sub_dir|
-      get_files_for(sub_dir).each do |f|
-        Factory.create_renamer(f).rename_file
-      end
+    recursive_get_dirs_and_files.each do |i|
+      rename_file i
     end
   end
 
-  def get_sub_directories
-    @get_sub_directories ||= Dir.glob("#{@parent_dir}")
+  def recursive_get_dirs_and_files
+    @recursive_get_dirs_and_files ||= Dir.glob("#{@parent_dir}/**/*")
   end
 
-  def get_files_for sub_directory
-    Dir.children sub_directory
+
+  private
+
+  def rename_file el
+    return if File.directory?(el)
+    Factory.create_renamer(el).new_file_name
   end
 end

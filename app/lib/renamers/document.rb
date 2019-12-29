@@ -5,7 +5,7 @@ class Document
     @file_name = file_name
   end
 
-  def rename_file
+  def new_file_name
     title = parse_title
     date = parse_date
     "#{[title, date].join('-')}.pdf"
@@ -26,7 +26,7 @@ class Document
   end
 
   def extract_date
-    regex = /(?<=Mon|Tue|Wed|Thu|Fri|Sat|Sun).*?(?=.pdf|ScanSnap)/
+    regex = /(?<=Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s.*?(?=.pdf|ScanSnap)/
     matches = @file_name.match regex
     clean_date = matches[0].strip
   end

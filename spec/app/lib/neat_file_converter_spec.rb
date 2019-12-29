@@ -1,32 +1,36 @@
 RSpec.describe NeatFileConverter do
-  let(:parent_dir) { '/Users/giambrone/Documents/raw scans/exact-scans/*' }
+  let(:parent_dir) { '/Users/giambrone/Documents/raw scans/exact-scans' }
   let(:subject) { NeatFileConverter.new parent_dir }
   let(:sub_dirs) {
     [
-      "/Users/giambrone/Documents/raw scans/exact-scans/Salary",
-      "/Users/giambrone/Documents/raw scans/exact-scans/Education",
+      "/Users/giambrone/Documents/raw scans/exact-scans/Sales",
+      "/Users/giambrone/Documents/raw scans/exact-scans/Sales/Receipts",
       "/Users/giambrone/Documents/raw scans/exact-scans/Credit Card"
     ]
   }
 
-  describe '#get_sub_directories' do
+  describe '#recursive_get_dirs_and_files' do
     it 'lists all sub directories for a given parent dir' do
-      expect(Dir).to receive(:glob) { sub_dirs }
-      expect(subject.get_sub_directories).to eq sub_dirs
-    end
-  end
-
-  describe '#get_files_for' do
-    it 'lists all files within a sub directory for a given directory' do
-      file_names = ['file-1.pdf', 'file-2.pdf']
-      expect(Dir).to receive(:children) { file_names }
-      expect(subject.get_files_for('sub_dir')).to eq file_names
+      expect(subject).to receive(:recursive_get_dirs_and_files) { sub_dirs }
+      expect(subject.recursive_get_dirs_and_files).to eq sub_dirs
     end
   end
 
   describe '#convert_file_names' do
-    xit '' do
+    it 'excludes directories' do
+      expect(subject).to receive(:recursive_get_dirs_and_files) { [sub_dirs.first] }
+      expect(File).to receive(:directory?) { true }
+      expect(Factory).to_not receive(:create_namer)
+      expect(subject.convert_file_names)
+    end
 
+    it 'excludes directories' do
+      factory = double('Factory')
+      expect(subject).to receive(:recursive_get_dirs_and_files) { [sub_dirs.first] }
+      expect(File).to receive(:directory?) { false }
+      expect(Factory).to receive(:create_renamer) { factory }
+      expect(factory).to receive(:new_file_name)
+      expect(subject.convert_file_names)
     end
   end
 end

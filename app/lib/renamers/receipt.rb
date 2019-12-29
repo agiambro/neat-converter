@@ -5,7 +5,7 @@ class Receipt
     @file_name = file_name
   end
 
-  def rename_file
+  def new_file_name
     company = parse_company
     date = parse_date
     amount = parse_amount
@@ -26,9 +26,10 @@ class Receipt
   end
 
   def extract_date
-    regex = /(Mon|Tue|Wed|Thu|Fri|Sat|Sun)[^$]*/
+    regex = /(?<=Mon|Tue|Wed|Thu|Fri|Sat|Sun).*?(?=-|\$|.pdf)/
     matches = @file_name.match regex
     clean_date = matches[0].strip
+    date_only = clean_date.split(' ').take(3).join(' ')
   end
 
   def parse_amount
