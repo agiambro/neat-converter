@@ -1,3 +1,5 @@
+require 'chronic'
+
 class Document
   def initialize file_name
     @file_name = file_name
