@@ -1,4 +1,5 @@
 require 'byebug'
+require 'fileutils'
 
 class NeatFileConverter
   DEFAULT_DIR = '/Users/giambrone/Documents/raw scans/exact-scans'
@@ -22,6 +23,8 @@ class NeatFileConverter
 
   def rename_file el
     return if File.directory?(el)
-    Factory.create_renamer(el).new_file_name
+    new_file_name = Factory.create_renamer(el).new_file_name
+    new_file_and_path = "#{File.dirname(el)}/#{new_file_name}"
+    FileUtils.mv el, new_file_and_path
   end
 end

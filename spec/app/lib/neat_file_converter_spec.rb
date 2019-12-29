@@ -30,6 +30,7 @@ RSpec.describe NeatFileConverter do
       expect(File).to receive(:directory?) { false }
       expect(Factory).to receive(:create_renamer) { factory }
       expect(factory).to receive(:new_file_name)
+      expect(FileUtils).to receive(:mv)
       expect(subject.convert_file_names)
     end
   end
