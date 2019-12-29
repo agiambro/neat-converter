@@ -13,7 +13,7 @@ class Document
   private
 
   def parse_title
-    regex = /Document-(.*)(Mon|Tue|Wed|Thu|Fri|Sat|Sun)/
+    regex = /Document-(.*)(?=Mon|Tue|Wed|Thu|Fri|Sat|Sun)/
     matches = @file_name.match regex
     title = matches[1].strip
     title.nil? ? title : clean_hyphen_join(title)
@@ -24,7 +24,7 @@ class Document
   end
 
   def extract_date
-    regex = /(Mon|Tue|Wed|Thu|Fri|Sat|Sun)[^.$]*/
+    regex = /(?<=Mon|Tue|Wed|Thu|Fri|Sat|Sun).*?(?=.pdf|ScanSnap)/
     matches = @file_name.match regex
     clean_date = matches[0].strip
   end
