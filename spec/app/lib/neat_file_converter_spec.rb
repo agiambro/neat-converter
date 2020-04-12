@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 RSpec.describe NeatFileConverter do
   let(:parent_dir) { '/Users/giambrone/Documents/raw scans/exact-scans' }
   let(:subject) { NeatFileConverter.new parent_dir }
